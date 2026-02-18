@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm view:*)",
+      "WebFetch(domain:docs.copilotkit.ai)"
+    ]
+  }
+}

@@ -6,7 +6,15 @@
       "Bash(python3:*)",
       "WebFetch(domain:github.com)",
       "Bash(npm view:*)",
-      "WebFetch(domain:docs.copilotkit.ai)"
+      "WebFetch(domain:docs.copilotkit.ai)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:www.copilotkit.ai)",
+      "WebFetch(domain:chat-with-your-data.vercel.app)",
+      "Bash(npm install:*)",
+      "Bash(npx next build)",
+      "Bash(npx next:*)",
+      "Bash(npm ls:*)"
     ]
   }
 }

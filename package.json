@@ -9,9 +9,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.57.0",
     "@copilotkit/react-core": "^1.8.0",
     "@copilotkit/react-ui": "^1.8.0",
     "@copilotkit/runtime": "^1.8.0",
+    "@langchain/core": "^1.1.26",
+    "@langchain/google-gauth": "^2.1.19",
     "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

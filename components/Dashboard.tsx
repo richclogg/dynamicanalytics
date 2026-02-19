@@ -166,10 +166,79 @@ function WidgetCard({ widget, onRemove }: { widget: DashboardWidget; onRemove: (
   );
 }
 
+// ─── MCP tool proxy ──────────────────────────────────────────────────────────
+
+async function callMCP(tool: string, params: Record<string, unknown> = {}): Promise<string> {
+  const res = await fetch("/api/mcp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ tool, params }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error ?? "MCP call failed");
+  return data.result as string;
+}
+
 // ─── Main Dashboard ──────────────────────────────────────────────────────────
 
 export function Dashboard() {
   const { widgets, addWidget, removeWidget } = useDashboard();
+
+  // ── BigQuery tools ──────────────────────────────────────────────────────────
+  useCopilotAction({
+    name: "list_tables",
+    description: "List all tables in the BigQuery dataset.",
+    parameters: [],
+    handler: async () => callMCP("list_tables"),
+  });
+
+  useCopilotAction({
+    name: "describe_table",
+    description: "Get the schema of a BigQuery table.",
+    parameters: [{ name: "table_name", type: "string", description: "Table name (unqualified or fully-qualified).", required: true }],
+    handler: async ({ table_name }) => callMCP("describe_table", { table_name }),
+  });
+
+  useCopilotAction({
+    name: "run_query",
+    description: "Execute a read-only SQL SELECT query against BigQuery.",
+    parameters: [{ name: "sql", type: "string", description: "SQL SELECT or WITH query to execute.", required: true }],
+    handler: async ({ sql }) => callMCP("run_query", { sql }),
+  });
+
+  // ── GA4 tools ───────────────────────────────────────────────────────────────
+  useCopilotAction({
+    name: "run_report",
+    description: "Run a Google Analytics 4 historical report.",
+    parameters: [
+      { name: "metrics", type: "string[]", description: 'GA4 metric names, e.g. ["sessions","totalUsers"].', required: true },
+      { name: "dimensions", type: "string[]", description: 'GA4 dimension names, e.g. ["date","country"].', required: false },
+      { name: "start_date", type: "string", description: 'Start date: "YYYY-MM-DD", "NdaysAgo", or "yesterday".', required: false },
+      { name: "end_date", type: "string", description: 'End date: "YYYY-MM-DD" or "today".', required: false },
+      { name: "limit", type: "number", description: "Max rows (default 100).", required: false },
+    ],
+    handler: async ({ metrics, dimensions, start_date, end_date, limit }) =>
+      callMCP("run_report", { metrics, dimensions, start_date, end_date, limit }),
+  });
+
+  useCopilotAction({
+    name: "run_realtime_report",
+    description: "Run a GA4 realtime report showing currently active users.",
+    parameters: [
+      { name: "metrics", type: "string[]", description: 'Realtime metric names, e.g. ["activeUsers"].', required: true },
+      { name: "dimensions", type: "string[]", description: "Realtime dimension names.", required: false },
+      { name: "limit", type: "number", description: "Max rows (default 50).", required: false },
+    ],
+    handler: async ({ metrics, dimensions, limit }) =>
+      callMCP("run_realtime_report", { metrics, dimensions, limit }),
+  });
+
+  useCopilotAction({
+    name: "get_property_metadata",
+    description: "Get available GA4 dimensions and metrics for the property.",
+    parameters: [],
+    handler: async () => callMCP("get_property_metadata"),
+  });
 
   // Paste a query string into the sidebar textarea when a chip is clicked
   useEffect(() => {

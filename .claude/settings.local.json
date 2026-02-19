@@ -24,7 +24,17 @@
       "Bash(npm run build:*)",
       "Bash(npm run dev:*)",
       "Bash(npx tsc:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(find:*)",
+      "Bash(chmod:*)",
+      "Bash(lsof:*)",
+      "Bash(uv:*)",
+      "Bash(\"/Users/richardclogg/Documents/Box Sync/Work - ADG/Git/richard-projects/mcp-servers/bigquery/.venv/bin/pip\" install -e \"/Users/richardclogg/Documents/Box Sync/Work - ADG/Git/richard-projects/mcp-servers/bigquery\")",
+      "Bash(\"/Users/richardclogg/Documents/Box Sync/Work - ADG/Git/richard-projects/mcp-servers/ga4/.venv/bin/pip\" install -e \"/Users/richardclogg/Documents/Box Sync/Work - ADG/Git/richard-projects/mcp-servers/ga4\")",
+      "Bash(MCP_TRANSPORT=streamable-http PORT=8001 .venv/bin/python3:*)",
+      "Bash(.venv/bin/python3:*)",
+      "Bash(PYTHONPATH=src MCP_TRANSPORT=streamable-http FASTMCP_HOST=127.0.0.1 FASTMCP_PORT=8001 .venv/bin/python3:*)",
+      "Bash(\"/Users/richardclogg/Documents/Box Sync/Work - ADG/Git/richard-projects/mcp-servers/bigquery/.venv/bin/python3\" -c \":*)"
     ]
   }
 }

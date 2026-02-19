@@ -6,20 +6,16 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { CustomAssistantMessage } from "../components/AssistantMessage";
 import { prompt } from "../lib/prompt";
-import { useCopilotReadable } from "@copilotkit/react-core";
+import { DashboardProvider } from "../components/DashboardContext";
 
 import { Suspense } from "react";
 
 function HomeContent() {
-  useCopilotReadable({
-    description: "Current time",
-    value: new Date().toLocaleTimeString(),
-  });
-
   return (
-    <>
+    <DashboardProvider>
       <CopilotSidebar
         defaultOpen
+        clickOutsideToClose={false}
         instructions={prompt}
         AssistantMessage={CustomAssistantMessage}
         labels={{
@@ -37,7 +33,7 @@ function HomeContent() {
           <Footer />
         </div>
       </CopilotSidebar>
-    </>
+    </DashboardProvider>
   );
 }
 

@@ -22,7 +22,8 @@
       "WebFetch(domain:ai-sdk.dev)",
       "Bash(bq show:*)",
       "Bash(npm run build:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

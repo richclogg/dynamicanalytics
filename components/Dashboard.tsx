@@ -188,31 +188,6 @@ export function Dashboard() {
     return () => window.removeEventListener("paste-query", handler);
   }, []);
 
-  // BigQuery query action
-  useCopilotAction({
-    name: "queryBigQuery",
-    description:
-      "Runs a SQL query against BigQuery to answer business questions. Use fully qualified table names: adg-internal-tech-sandbox.data_demos.<table>",
-    parameters: [
-      {
-        name: "query",
-        type: "string",
-        description: "The GoogleSQL query to run against BigQuery",
-        required: true,
-      },
-    ],
-    handler: async ({ query }) => {
-      const res = await fetch("/api/bigquery", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query }),
-      });
-      const data = await res.json();
-      if (!res.ok) return `Query error: ${data.error}`;
-      return JSON.stringify(data.rows, null, 2);
-    },
-  });
-
   // Render actions — show chart in chat with a Pin button
   useCopilotAction({
     name: "renderLineChart",

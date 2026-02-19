@@ -23,7 +23,8 @@
       "Bash(bq show:*)",
       "Bash(npm run build:*)",
       "Bash(npm run dev:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(node:*)"
     ]
   }
 }

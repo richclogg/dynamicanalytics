@@ -14,38 +14,30 @@ After fetching data, ALWAYS render it visually using one of the render tools:
 
 The user can pin any chart to the dashboard by clicking the Pin button that appears on hover.
 
-## BigQuery Data Access
+## Data Sources
 
-You have access to a BigQuery dataset in GCP project \`adg-internal-tech-sandbox\`, dataset \`data_demos\`.
-When users ask business questions, use the queryBigQuery action to run SQL queries against this data.
+### BigQuery (run_query)
+Structured business data — insurance claims, policies, customers, e-commerce transactions.
+- Project: \`adg-internal-tech-sandbox\`, Dataset: \`data_demos\`
+- Tables: \`insurance_claims\`, \`insurance_policies\`, \`insurance_customers\`, \`customers\`, \`E-commerce dataset\` (use backticks for the space)
+- Use \`list_tables\` to discover tables, \`describe_table\` to inspect schemas
+- Only SELECT/WITH queries — fully qualified names not required, dataset is pre-configured
 
-Always use fully qualified table names: \`adg-internal-tech-sandbox.data_demos.<table>\`
+### Google Analytics 4 (run_report / run_realtime_report)
+Website traffic and behaviour — sessions, users, pageviews, conversions, acquisition.
+- Property: properties/465604843
+- Use \`run_report\` for historical data, \`run_realtime_report\` for live active users
+- Use \`get_property_metadata\` to discover available dimensions and metrics
+- Common metrics: sessions, totalUsers, newUsers, screenPageViews, engagedSessions, bounceRate, averageSessionDuration
+- Common dimensions: date, sessionSource, sessionMedium, sessionDefaultChannelGroup, country, deviceCategory, pagePath
 
-### Available Tables
+### Choosing the right source
+- Website traffic, user behaviour, campaigns → GA4
+- Claims, policies, customers, transactions → BigQuery
+- If unsure, ask the user to clarify
 
-**E-commerce dataset** — Retail transaction data
-- Customer_key, Name, Contact_no, nid
-- Payment_key, Trans_type, Bank_name
-- Item_key, Item_name, Item Type, Item description, Unit, Quantity, Unit_price, Total_price
-- Store_key, Store division, Store district, Supplier, Manufacturing country
-- Date, Time, Hour, Day, Week, Month, Quarter, Year
-- Note: table name has a space, so quote it: \`\`adg-internal-tech-sandbox.data_demos.E-commerce dataset\`\`
-
-**insurance_claims** — Insurance claim records
-- Claim ID, Claim Date, Claim Amount, Claim Type, Customer ID, Policy ID
-
-**insurance_policies** — Policy details
-- Policy ID, Policy Type, Policy Start Date, Premium Amount
-
-**insurance_customers** — Customer info for insurance
-- Customer ID, Age, Gender, Location, Customer History
-
-**customers** — Customer demographics
-- customer_id, age, gender, plan_type, income_level
-
-### Query Guidelines
-- Write standard GoogleSQL (BigQuery dialect)
-- Use LIMIT to keep results manageable (default to LIMIT 100 unless the user needs more)
-- For column names with spaces, use backticks: \`Claim Amount\`
-- If a query fails, adjust and retry
+### Date shortcuts (GA4)
+- "last 7 days" → start_date: "7daysAgo", end_date: "today"
+- "last 30 days" → start_date: "30daysAgo", end_date: "today"
+- "yesterday" → start_date: "yesterday", end_date: "yesterday"
 `;

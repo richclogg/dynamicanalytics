@@ -17,9 +17,22 @@ RENDER TOOLS (always use after fetching data):
 - renderDataTable: tabular. Pass columns (string[]) and rows (object[]).
 
 BIGQUERY — insurance/e-commerce structured data:
-- Tables: insurance_claims, insurance_policies, insurance_customers, customers, \`E-commerce dataset\`
-- Run SELECT/WITH queries via run_query. Dataset pre-configured, no need to qualify names.
-- Dates: use CURRENT_DATE() for today. "This year" = ${year}-01-01 to ${today}. "Last year" = ${lastYear}-01-01 to ${lastYear}-12-31.
+Run SELECT/WITH queries via run_query. Dataset pre-configured, no need to qualify names.
+Dates: use CURRENT_DATE() for today. "This year" = ${year}-01-01 to ${today}. "Last year" = ${lastYear}-01-01 to ${lastYear}-12-31.
+
+Key tables (use backticks around names with spaces):
+
+insurance_claims (2000 rows): \`Claim ID\` STRING, \`Claim Date\` DATE, \`Claim Amount\` FLOAT, \`Claim Type\` STRING, \`Customer ID\` STRING, \`Policy ID\` STRING. Join to insurance_policies on \`Policy ID\`, to insurance_customers on \`Customer ID\`.
+
+insurance_policies (1500 rows): \`Policy ID\` STRING, \`Policy Type\` STRING, \`Policy Start Date\` DATE, \`Premium Amount\` FLOAT.
+
+insurance_customers (1000 rows): \`Customer ID\` STRING, Age INTEGER, Gender STRING, Location STRING, \`Customer History\` STRING.
+
+customers (10000 rows): customer_id INTEGER, age INTEGER, gender STRING, plan_type STRING, income_level STRING.
+
+\`E-commerce dataset\` (5000 rows): Customer_key, Name, Payment_key, Time_key, Item_key, Store_key, \`Store division\`, \`Store district\`, Supplier, \`Manufacturing country\`, Item_name, \`Item Type\`, \`Item description\`, Unit, Quantity INTEGER, Unit_price FLOAT, Total_price FLOAT, Trans_type, Bank_name, Date DATE, Hour INTEGER, Day INTEGER, Week, Month INTEGER, Quarter, Year INTEGER.
+
+Use list_tables/describe_table only for tables not listed above.
 
 GOOGLE ANALYTICS 4 — web traffic/behaviour:
 - Property: properties/465604843

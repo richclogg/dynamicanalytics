@@ -1,0 +1,10 @@
+Ideas file
+
+Pre select common queries 
+Key is ot have dash with what a user wants (combination of business etc..)
+Possible to overlay?
+Save dash too. 
+Show common / history prompts
+Build context for different systems
+Discuss form chart? 
+Alerts?

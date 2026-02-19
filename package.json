@@ -13,6 +13,7 @@
     "@copilotkit/react-core": "^1.8.0",
     "@copilotkit/react-ui": "^1.8.0",
     "@copilotkit/runtime": "^1.8.0",
+    "@google-cloud/bigquery": "^8.1.1",
     "@langchain/core": "^1.1.26",
     "@langchain/google-gauth": "^2.1.19",
     "@radix-ui/react-slot": "^1.1.2",

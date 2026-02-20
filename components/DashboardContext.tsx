@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useCallback, ReactNode } from "rea
 
 export interface DashboardWidget {
   id: string;
-  type: "line" | "bar" | "kpi" | "table";
+  type: "line" | "bar" | "kpi" | "table" | "pie" | "insight" | "gauge" | "comparison" | "map";
   title: string;
   data: any;
   timestamp: number;
